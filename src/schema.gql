@@ -1,0 +1,84 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AirtimeResponse {
+  amount: String!
+  code: String!
+  purchased_code: String!
+  requestId: String!
+  response_description: String!
+  transactionId: String!
+}
+
+input AirtimeResponseInput {
+  amount: String!
+  code: String!
+  purchased_code: String!
+  requestId: String!
+  response_description: String!
+  transactionId: String!
+}
+
+type Auth {
+  token: String!
+  user: User!
+}
+
+input CreateUserInput {
+  bvn: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phone: String!
+}
+
+input CreateWalletInput {
+  balance: Float!
+  userId: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createAirtimeResponse(input: AirtimeResponseInput!): AirtimeResponse!
+  createUser(input: CreateUserInput!): User!
+  createWallet(input: CreateWalletInput!): Wallet!
+  deleteTransactionResponse(id: ID!): AirtimeResponse!
+  deleteWallet(id: ID!): Wallet!
+  login(input: LoginInput!): Auth!
+  updateAirtimeResponse(id: ID!, input: AirtimeResponseInput!): AirtimeResponse!
+  updateWallet(input: UpdateWalletInput!): Wallet!
+}
+
+type Query {
+  getAirtimeResponse(id: ID!): AirtimeResponse!
+  getAirtimeResponses: [AirtimeResponse!]!
+  getAllWallets: [Wallet!]!
+  getWallet(id: ID!): Wallet!
+  users: [User!]!
+}
+
+input UpdateWalletInput {
+  _id: String!
+  balance: Float
+}
+
+type User {
+  bvn: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phone: String!
+}
+
+type Wallet {
+  _id: ID!
+  balance: Float!
+  userId: String!
+}
