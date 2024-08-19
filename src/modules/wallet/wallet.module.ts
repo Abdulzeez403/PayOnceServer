@@ -6,9 +6,10 @@ import { WalletResolver } from './wallet.resolver';
 import { Wallet, WalletSchema } from './wallet.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: Wallet.name, schema: WalletSchema }]),
-  ],
-  providers: [WalletService, WalletResolver],
+    imports: [
+        MongooseModule.forFeature([{ name: Wallet.name, schema: WalletSchema }]),
+    ],
+    providers: [WalletService, WalletResolver],
+    exports: [WalletService],
 })
-export class WalletModule {}
+export class WalletModule { }

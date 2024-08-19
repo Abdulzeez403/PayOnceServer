@@ -25,6 +25,12 @@ type Auth {
   user: User!
 }
 
+type CreateDeposit {
+  _id: ID!
+  amount: Float!
+  email: String!
+}
+
 input CreateUserInput {
   bvn: String!
   email: String!
@@ -46,13 +52,21 @@ input LoginInput {
 
 type Mutation {
   createAirtimeResponse(input: AirtimeResponseInput!): AirtimeResponse!
+  createDeposit(amount: Float!, email: String!): CreateDeposit!
   createUser(input: CreateUserInput!): User!
   createWallet(input: CreateWalletInput!): Wallet!
   deleteTransactionResponse(id: ID!): AirtimeResponse!
   deleteWallet(id: ID!): Wallet!
+  handleWebhook(payload: PaystackWebhookInput!): Boolean!
   login(input: LoginInput!): Auth!
   updateAirtimeResponse(id: ID!, input: AirtimeResponseInput!): AirtimeResponse!
   updateWallet(input: UpdateWalletInput!): Wallet!
+  verifyTransaction(reference: String!): VerifyReference!
+}
+
+input PaystackWebhookInput {
+  data: String!
+  event: String!
 }
 
 type Query {
@@ -75,6 +89,10 @@ type User {
   lastName: String!
   password: String!
   phone: String!
+}
+
+type VerifyReference {
+  reference: String!
 }
 
 type Wallet {

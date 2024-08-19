@@ -7,42 +7,42 @@ import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => Wallet)
 export class WalletResolver {
-  constructor(private readonly walletService: WalletService) {}
+    constructor(private readonly walletService: WalletService) { }
 
-  @Query(() => [Wallet])
-  async getAllWallets(): Promise<Wallet[]> {
-    return this.walletService.findAll();
-  }
+    @Query(() => [Wallet])
+    async getAllWallets(): Promise<Wallet[]> {
+        return this.walletService.findAll();
+    }
 
-  @Query(() => Wallet)
-  async getWallet(@Args('id', { type: () => ID }) id: string): Promise<Wallet> {
-    return this.walletService.findOneById(id);
-  }
+    @Query(() => Wallet)
+    async getWallet(@Args('id', { type: () => ID }) id: string): Promise<Wallet> {
+        return this.walletService.findOneById(id);
+    }
 
-  @Mutation(() => Wallet)
-  @UseGuards(JwtAuthGuard)
-  async createWallet(@Args('input') input: CreateWalletInput): Promise<Wallet> {
-    const walletData: Partial<Wallet> = {
-      userId: input.userId,
-      balance: input.balance,
-    };
-    return this.walletService.create(walletData as Wallet);
-  }
+    @Mutation(() => Wallet)
+    @UseGuards(JwtAuthGuard)
+    async createWallet(@Args('input') input: CreateWalletInput): Promise<Wallet> {
+        const walletData: Partial<Wallet> = {
+            userId: input.userId,
+            balance: input.balance,
+        };
+        return this.walletService.create(walletData as Wallet);
+    }
 
-  @Mutation(() => Wallet)
-  @UseGuards(JwtAuthGuard)
-  async updateWallet(@Args('input') input: UpdateWalletInput): Promise<Wallet> {
-    const walletData: Partial<Wallet> = {
-      userId: input._id,
-      balance: input.balance,
-    };
-    return this.walletService.update(walletData as Wallet);
-  }
+    @Mutation(() => Wallet)
+    @UseGuards(JwtAuthGuard)
+    async updateWallet(@Args('input') input: UpdateWalletInput): Promise<Wallet> {
+        const walletData: Partial<Wallet> = {
+            userId: input._id,
+            balance: input.amount,
+        };
+        return this.walletService.updateBalance(walletData as any);
+    }
 
-  @Mutation(() => Wallet)
-  async deleteWallet(
-    @Args('id', { type: () => ID }) id: string,
-  ): Promise<Wallet> {
-    return this.walletService.remove(id);
-  }
+    @Mutation(() => Wallet)
+    async deleteWallet(
+        @Args('id', { type: () => ID }) id: string,
+    ): Promise<Wallet> {
+        return this.walletService.remove(id);
+    }
 }
